@@ -208,11 +208,11 @@
             display: flex;
             flex-wrap: wrap; /* Wrap images within the container */
             justify-content: space-between; /* Arrange images with space between them */
-            padding: 10px 0;
+            padding: 10px;
         }
 
         .photo-gallery img {
-            width: calc(50% - 15px); /* Two images per row */
+            width: calc(50% - 10px); /* Two images per row by default */
             margin-bottom: 20px; /* Spacing between rows */
             border-radius: 5px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow effect */
@@ -220,7 +220,7 @@
 
         @media (max-width: 600px) {
             .photo-gallery img {
-                width: 100%; /* On smaller screens, display one image per row */
+                width: 100% !important; /* Display one image per row on mobile view */
                 margin-bottom: 20px; /* Spacing between rows */
             }
         }
@@ -254,8 +254,8 @@
     <div class="title">
         <h1>Abhinav</h1>
         <!--            <h2 class="love-icon"><i class="fas fa-heart"></i></h2>-->
-<!--        <img src="assets/wedding.gif">-->
-                    <h2>&</h2>
+        <img src="assets/wedding.gif">
+<!--                    <h2>&</h2>-->
         <h1>Ramyakrishna</h1>
         <h3>Are getting married</h3>
         <p>
