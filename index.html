@@ -27,35 +27,26 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.14/moment-timezone-with-data-2012-2022.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.js'></script>
     <script>
-        // Function to update the countdown clock
-        function updateCountdown() {
-            // Wedding date and time (Year, Month (0-11), Day, Hour, Minute, Second)
-            const weddingDate = new Date(2023, 10, 18, 12, 15, 0); // November is 10 (0-based index)
+        // JavaScript for countdown timer in IST
+        var weddingDate = new Date("2023-11-18T12:15:00Z");
+        var istOffset = 5.5 * 60 * 60 * 1000; // Offset in milliseconds for IST (UTC+5:30)
 
-            // Get the current date and time
-            const now = new Date().getTime();
+        var x = setInterval(function() {
+            var now = new Date().getTime() + istOffset; // Adding IST offset
+            var distance = weddingDate - now;
 
-            // Calculate the time remaining
-            const timeRemaining = weddingDate - now;
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            // Calculate days, hours, minutes, and seconds
-            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+            document.getElementById("countdown").innerHTML = days + " d: " + hours + " h: " + minutes + " m: " + seconds + " s";
 
-            // Display the countdown in the 'time' div
-            document.getElementById('time').innerHTML = `
-        <p class="countdown">
-          ${days} days ${hours} hours ${minutes} minutes ${seconds} seconds remaining until the wedding!
-        </p>`;
-        }
-
-        // Update the countdown every second
-        setInterval(updateCountdown, 1000);
-
-        // Call updateCountdown initially to start the countdown immediately
-        updateCountdown();
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown").innerHTML = "The wedding has already happened!";
+            }
+        }, 1000);
     </script>
     <style>
         .title .love-icon {
@@ -333,29 +324,6 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
 <script src='https://cdn.jsdelivr.net/gh/timoschaefer/jQuery-Sakura/jquery-sakura.min.js'></script>
 <script src="./js/script.js"></script>
-<script>
-    // JavaScript for countdown timer
-    // Set the date for the wedding
-    var weddingDate = new Date("2023-11-18T12:15:00Z").getTime();
-
-    var x = setInterval(function() {
-        var now = new Date().getTime();
-        var distance = weddingDate - now;
-
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        document.getElementById("countdown").innerHTML = days + "d " + hours + "h " +
-            minutes + "m " + seconds + "s ";
-
-        if (distance < 0) {
-            clearInterval(x);
-            document.getElementById("countdown").innerHTML = "The wedding has already happened!";
-        }
-    }, 1000);
-</script>
 </body>
 <footer>Built with ❤️</footer>
 
